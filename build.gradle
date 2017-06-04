@@ -1,0 +1,16 @@
+subprojects {
+    apply plugin: 'java'
+}
+
+project(':common'){
+    apply plugin: 'java'
+}
+project (':server-ui'){
+}
+project (':server-core'){
+}
+project (':tracker-core'){
+}
+project (':tracker-ui'){
+}
+
