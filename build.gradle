@@ -1,6 +1,7 @@
 subprojects {
     apply plugin: 'java'
     apply plugin: 'java-library-distribution'
+    apply plugin: 'gradle-one-jar'
     repositories{
         mavenCentral()
         mavenLocal()
@@ -22,10 +23,16 @@ project (':server-ui'){
     dependencies{
         compile project(':common')
     }
+    task fatJar(type: OneJar) {
+        mainClass = 'jdev.server.Main'
+    }
 }
 project (':server-core'){
     dependencies{
         compile project(':common')
+    }
+    task fatJar(type: OneJar) {
+        mainClass = 'jdev.server.Main'
     }
 }
 
@@ -34,11 +41,30 @@ project (':tracker-ui'){
     dependencies{
         compile project(':common')
     }
+    task fatJar(type: OneJar) {
+        mainClass = 'jdev.tracker.Main'
+    }
+}
+
+
+
+apply plugin: 'gradle-one-jar'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+    }
 }
 
 project(':tracker-core') {
     dependencies {
         compile project(':common')
     }
-}
 
+    task fatJar(type: OneJar) {
+        mainClass = 'jdev.tracker.Main'
+    }
+}
