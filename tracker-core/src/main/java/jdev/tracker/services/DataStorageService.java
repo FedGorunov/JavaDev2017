@@ -17,6 +17,9 @@ public class DataStorageService {
     private BlockingDeque<PointDTO> queue =  new LinkedBlockingDeque<>(100);
 
 
+    public BlockingDeque<PointDTO> getQueue() {
+        return queue;
+    }
 
     PointDTO take() throws InterruptedException {
         log.info("take trying!!!");
@@ -25,7 +28,7 @@ public class DataStorageService {
     }
 
     void put(PointDTO point) throws InterruptedException {
-        log.info("ScheduledQueueService.put " + point);
+        log.info("Added to storage: " + point);
         queue.put(point);
     }
 

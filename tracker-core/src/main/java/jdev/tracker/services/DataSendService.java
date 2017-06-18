@@ -13,18 +13,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class DataSendService {
     private static final Logger log = LoggerFactory.getLogger(DataStorageService.class);
-    private long current = System.currentTimeMillis();
-    private long previous;
-
 
     @Autowired
     DataStorageService dataStorageService;
 
-    @Scheduled(fixedDelay = 1_000)
+    @Scheduled(fixedDelay = 15_000)
     private void sendDTO() throws InterruptedException {
-       PointDTO dto = dataStorageService.take();
-        log.info((current - previous) + " ScheduledQueueService.take " + dto);
-        previous = current;
+        int i=0;
+        for (PointDTO p:dataStorageService.getQueue()) {
+            log.info(" Point number "+i +": " + p);
+            i++;
+        }
     }
 
 
