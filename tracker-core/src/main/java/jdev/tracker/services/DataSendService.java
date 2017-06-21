@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class DataSendService {
-    private static final Logger log = LoggerFactory.getLogger(DataStorageService.class);
+    private static final Logger log = LoggerFactory.getLogger(DataSendService.class);
 
     @Autowired
     DataStorageService dataStorageService;
 
-    @Scheduled(fixedDelay = 15_000)
+    @Scheduled(fixedDelay = 60_000)
     private void sendDTO() throws InterruptedException {
         int i=0;
         for (PointDTO p:dataStorageService.getQueue()) {

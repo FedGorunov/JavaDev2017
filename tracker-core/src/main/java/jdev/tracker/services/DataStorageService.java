@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class DataStorageService {
     private static final Logger log = LoggerFactory.getLogger(DataStorageService.class);
-    private BlockingDeque<PointDTO> queue =  new LinkedBlockingDeque<>(100);
+    private BlockingDeque<PointDTO> queue =  new LinkedBlockingDeque<>(1000);
 
 
     public BlockingDeque<PointDTO> getQueue() {
@@ -24,7 +24,6 @@ public class DataStorageService {
     PointDTO take() throws InterruptedException {
         log.info("take trying!!!");
         return queue.poll(500, TimeUnit.MILLISECONDS);
-
     }
 
     void put(PointDTO point) throws InterruptedException {
