@@ -1,7 +1,6 @@
 subprojects {
     apply plugin: 'java'
     apply plugin: 'java-library-distribution'
-    apply plugin: 'gradle-one-jar'
     repositories{
         mavenCentral()
         mavenLocal()
@@ -15,66 +14,69 @@ subprojects {
 project(':common'){
     apply plugin: 'java'
     dependencies{
-// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+        // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.8'
-        // https://mvnrepository.com/artifact/org.springframework/spring-context
-        compile group: 'org.springframework', name: 'spring-context', version: '4.3.7.RELEASE'
-        testCompile group: 'junit', name: 'junit', version: '4.12'
     }
 }
 project (':server-ui'){
     dependencies{
         compile project(':common')
     }
-    task fatJar(type: OneJar) {
-        mainClass = 'jdev.server.Main'
-    }
-}
-project (':server-core'){
-    dependencies{
-        compile project(':common')
-    }
-    task fatJar(type: OneJar) {
-        mainClass = 'jdev.server.Main'
-    }
+    /* task fatJar(type: OneJar) {
+         mainClass = 'jdev.server.Main'
+     }*/
 }
 
-
-project (':tracker-ui'){
-    dependencies{
-        compile project(':common')
-    }
-    task fatJar(type: OneJar) {
-        mainClass = 'jdev.tracker.Main'
-    }
-}
-
-
-
-apply plugin: 'gradle-one-jar'
 
 buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.3.RELEASE")
     }
 }
 
-project(':tracker-core') {
+project (':server-core') {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
     dependencies {
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.springframework.boot:spring-boot-devtools")
         compile project(':common')
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+    }
+}
+
+project (':tracker-ui'){
+    dependencies{
+        compile project(':common')
+    }
+    /*task fatJar(type: OneJar) {
+        mainClass = 'jdev.tracker.Main'
+    }*/
+}
+
+
+project(':tracker-core') {
+
+    apply plugin: 'org.springframework.boot'
+
+    dependencies {
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.springframework.boot:spring-boot-devtools")
+        compile project(':common')
+        testCompile("org.springframework.boot:spring-boot-starter-test")
         // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-        compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+        //compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
         // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
-        compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
+        // compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
         // https://mvnrepository.com/artifact/de.micromata.jak/JavaAPIforKml
         compile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.1'
 
     }
 
-    task fatJar(type: OneJar) {
-        mainClass = 'jdev.tracker.Main'
-    }
+    /* task fatJar(type: OneJar) {
+         mainClass = 'jdev.tracker.Main'
+     }*/
 }

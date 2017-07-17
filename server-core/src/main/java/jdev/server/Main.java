@@ -1,19 +1,25 @@
 package jdev.server;
 
-import jdev.dto.PointDTO;
+import jdev.server.services.FileService;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * Created by pinta on 06.06.2017.
  */
-public class Main {
-    public static void main(String[] args) throws Exception {
-        for (int i=0; i<5; i++) {
-            System.out.println("Main from server-core say Hello!!!!");
-            PointDTO point = new PointDTO();
-            point.setLat(45);
-            System.out.println(point.toJson());
-            Thread.sleep(1000);
-        }
+@SpringBootApplication
+@ComponentScan({"jdev.server","services","controllers"})
+public class Main{
 
+    public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
     }
+
+    @Bean
+    public FileService fileService(){
+        return new FileService();
+    }
+
 }
