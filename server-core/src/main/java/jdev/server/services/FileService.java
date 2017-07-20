@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @Service
 public class FileService {
-    private File file = new File("server-core/src/main/resources/tracks.txt");
+    private File file = new File("server-core//src//main//resources//tracks.txt");
 
     public void writeInFile(String data) {
         try (BufferedWriter br = new BufferedWriter(new FileWriter(file, true))) {

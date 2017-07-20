@@ -46,6 +46,10 @@ project (':server-core') {
         compile project(':common')
         testCompile("org.springframework.boot:spring-boot-starter-test")
     }
+    jar {
+        baseName = 'server-core-boot'
+        version =  '0.1.0'
+    }
 }
 
 project (':tracker-ui'){
@@ -79,4 +83,8 @@ project(':tracker-core') {
     /* task fatJar(type: OneJar) {
          mainClass = 'jdev.tracker.Main'
      }*/
+    jar {
+        baseName = 'tracker-core-boot'
+        version =  '0.1.0'
+    }
 }
