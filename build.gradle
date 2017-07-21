@@ -19,12 +19,23 @@ project(':common'){
     }
 }
 project (':server-ui'){
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
     dependencies{
+        compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+        compile("org.springframework.boot:spring-boot-starter-security")
+        compile("org.springframework.boot:spring-boot-devtools")
         compile project(':common')
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile("org.springframework.security:spring-security-test")
     }
     /* task fatJar(type: OneJar) {
          mainClass = 'jdev.server.Main'
      }*/
+    jar {
+        baseName = 'server-ui-boot'
+        version =  '0.1.0'
+    }
 }
 
 
