@@ -18,10 +18,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         http.authorizeRequests()
                 .antMatchers("/","/css","/img").permitAll()
                 .antMatchers("/home").authenticated()
-                .antMatchers("/routes/**", "/payments/**").hasRole("CLIENT")
-                .antMatchers("/registerClient/**").hasRole("MANAGER")
-                .antMatchers("/registerManager/**").hasRole("ROOT")
-                .anyRequest().hasRole("CLIENT")
+                .antMatchers("/registerManager").hasRole("ROOT")
+                .antMatchers("/routes/**", "/payments/**").access("hasRole('CLIENT') or hasRole('ROOT')")
+                .antMatchers("/registerClient/**").access("hasRole('MANAGER') or hasRole('ROOT')")
+                .anyRequest().hasRole("ROOT")
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .withUser("Manager").password("secret").roles("CLIENT", "MANAGER")
                 .and()
-                .withUser("Admin").password("super").roles("CLIENT", "MANAGER", "ROOT");
+                .withUser("Admin").password("super").roles("ROOT");
     }
 }
 
