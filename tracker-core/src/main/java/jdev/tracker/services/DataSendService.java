@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 public class DataSendService {
     private static final Logger log = LoggerFactory.getLogger(DataSendService.class);
     private static final int TIME_OUT = 10_000;
+
     @Autowired
     DataStorageService dataStorageService;
 
