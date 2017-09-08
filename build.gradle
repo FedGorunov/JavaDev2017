@@ -56,6 +56,7 @@ project (':server-core') {
         compile("org.springframework.boot:spring-boot-devtools")
         compile project(':common')
         testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
     }
     jar {
         baseName = 'server-core-boot'

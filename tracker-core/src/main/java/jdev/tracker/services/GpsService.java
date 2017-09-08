@@ -2,6 +2,7 @@ package jdev.tracker.services;
 
 import de.micromata.opengis.kml.v_2_2_0.*;
 import jdev.dto.PointDTO;
+import jdev.dto.Points;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,10 @@ import java.util.List;
 @Service
 public class GpsService {
     private static final Logger log = LoggerFactory.getLogger(GpsService.class);
-    private int putCount;
+    private int putCount =0;
+    private static final int TIMEOUT = 1_000;
+    private  long time = 1_498_998_207_587L;
+    double lat, latPrev, lon, lonPrev;
     @Autowired
     DataStorageService dataStorageService;
 
@@ -26,19 +30,27 @@ public class GpsService {
     LineString point = (LineString) placemark.getGeometry();
     List<Coordinate> coordinates = point.getCoordinates();
 
-    @Scheduled(fixedRate = 1_000)
+    @Scheduled(fixedRate = TIMEOUT)
     public void poolGPS() throws InterruptedException {
         int i = putCount++;
-        if(i<coordinates.size()){
-        PointDTO dto = new PointDTO();
-        dto.setAutoId("a001aa");
-        dto.setLat(coordinates.get(i).getLatitude());
-        dto.setLon(coordinates.get(i).getLongitude());
-        dataStorageService.put(dto);}
-        else {
+        if (i < coordinates.size()) {
+            PointDTO dto = new PointDTO();
+            dto.setAutoId("a001aa");
+            latPrev = coordinates.get(i - 1).getLatitude();
+            lat = coordinates.get(i).getLatitude();
+            lonPrev = coordinates.get(i - 1).getLongitude();
+            lon = coordinates.get(i).getLongitude();
+
+            dto.setLat(latPrev);
+            dto.setLon(lonPrev);
+            time += TIMEOUT;
+            dto.setTime(time);
+            dto.setCourse(Points.getCourse(latPrev, lat, lonPrev, lon));
+            dto.setSpeed(Points.getDistance(latPrev, lat, lonPrev, lon) * 1000 / TIMEOUT);
+            dataStorageService.put(dto);
+        } else {
             log.info("The track is finished.");
 
         }
     }
-
 }

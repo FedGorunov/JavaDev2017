@@ -1,0 +1,11 @@
+PointDTO{lat=25.0, lon=15.0, course='0.0', speed'350.0', autoId='NUM'}
+PointDTO{lat=25.0, lon=15.0, course='0.0', speed'350.0', autoId='NUM'}
+PointDTO{lat=25.0, lon=15.0, course='0.0', speed'350.0', autoId='NUM'}
+PointDTO{lat=25.0, lon=15.0, course='0.0', speed'350.0', autoId='NUM'}
+PointDTO{lat=25.0, lon=15.0, course='0.0', speed'350.0', autoId='NUM'}
+PointDTO{lat=25.0, lon=15.0, course='0.0', speed'350.0', autoId='NUM'}
+PointDTO{lat=25.0, lon=15.0, course='0.0', speed'350.0', autoId='NUM'}
+PointDTO{lat=25.0, lon=15.0, course='0.0', speed'350.0', autoId='NUM'}
+PointDTO{lat=25.0, lon=15.0, course='0.0', speed'350.0', autoId='NUM'}
+PointDTO{lat=25.0, lon=15.0, course='0.0', speed'350.0', autoId='NUM'}
+PointDTO{lat=25.0, lon=15.0, course='0.0', speed'350.0', autoId='NUM'}

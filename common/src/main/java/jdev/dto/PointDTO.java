@@ -9,7 +9,34 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class PointDTO {
     private double lat;
     private double lon;
+    private double speed; // current speed (km/h)
+    private double course; // current car course ( rad)
+    private long time;      // current time (msec)
     private String autoId;
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
+
+    public void setCourse(double course) {
+        this.course = course;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public double getCourse() {
+        return course;
+    }
+
+    public long getTime() {
+        return time;
+    }
 
     public double getLat() {
         return lat;
@@ -40,6 +67,8 @@ public class PointDTO {
         return "PointDTO{" +
                 "lat=" + lat +
                 ", lon=" + lon +
+                ", course='" + course + '\'' +
+                ", speed'" + speed + '\'' +
                 ", autoId='" + autoId + '\'' +
                 '}';
     }
