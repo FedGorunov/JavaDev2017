@@ -27,12 +27,12 @@ public class DataSendService {
 
 
     @Scheduled(fixedDelay = TIME_OUT)
-    private void sendDTO() throws InterruptedException {
+    public void sendDTO() throws InterruptedException {
         int i=0;
-        for (PointDTO p:dataStorageService.getQueue()) {
+       for (PointDTO p:dataStorageService.getQueue()) {
             log.info(" Point number "+i +": " + p);
             restTemplate.postForObject("http://localhost:8080/rest/points/create", p, PointDTO.class);
-            i++;
+          i++;
         }
     }
 }

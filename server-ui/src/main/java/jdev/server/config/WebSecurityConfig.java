@@ -17,23 +17,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/","/css","/img").permitAll()
-                .antMatchers("/home","/hello").authenticated()
-                .antMatchers("/routes/**", "/payments/**").hasAnyRole("CLIENT","MANAGER","ROOT")
-                .antMatchers("/registerClient/**").hasAnyRole("MANAGER","ROOT")
-                .antMatchers("/**").hasRole("ROOT")
+                .antMatchers("/home").authenticated()
+                .antMatchers("/routes/**", "/payments/**").hasRole("CLIENT")
+                .antMatchers("/registerClient/**").hasRole("MANAGER")
+                .antMatchers("/registerManager/**").hasRole("ROOT")
+                .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .and()
                 .logout().permitAll();
     }
+
     @Autowired
-    protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth.inMemoryAuthentication()
-                .withUser("User").password("pass").roles("CLIENT")
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth
+                .inMemoryAuthentication()
+                .withUser("client").password("client").roles("CLIENT")
                 .and()
-                .withUser("Manager").password("secret").roles("MANAGER")
+                .withUser("manager").password("manager").roles("MANAGER", "CLIENT")
                 .and()
-                .withUser("Admin").password("super").roles("ROOT");
+                .withUser("root").password("root").roles("ROOT", "MANAGER", "CLIENT");
+
     }
 
 }

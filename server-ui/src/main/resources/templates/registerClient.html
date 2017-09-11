@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<p>если у Вас есть роль MANAGER то это Ваша страница!!!</p>
+<p>Регистрация клиента.(eсли у Вас есть роль MANAGER!)</p>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Выйти из системы"/>
 </form>

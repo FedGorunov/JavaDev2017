@@ -49,7 +49,7 @@ public class GpsService {
             dto.setSpeed(Points.getDistance(latPrev, lat, lonPrev, lon) * 1000 / TIMEOUT);
             dataStorageService.put(dto);
         } else {
-            log.info("The track is finished.");
+            log.info("The track is over.");
 
         }
     }
