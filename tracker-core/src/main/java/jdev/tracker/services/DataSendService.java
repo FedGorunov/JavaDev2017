@@ -8,6 +8,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Fedor on 11.06.2017.
  */
@@ -27,12 +30,15 @@ public class DataSendService {
 
 
     @Scheduled(fixedDelay = TIME_OUT)
-    public void sendDTO() throws InterruptedException {
+    public List<PointDTO> sendDTO() throws InterruptedException {
+        List<PointDTO> list = new ArrayList<>();
         int i=0;
        for (PointDTO p:dataStorageService.getQueue()) {
             log.info(" Point number "+i +": " + p);
-            restTemplate.postForObject("http://localhost:8080/rest/points/create", p, PointDTO.class);
+          list.add(restTemplate.postForObject("http://localhost:8080/rest/points/create", p, PointDTO.class));
+
           i++;
         }
+        return list;
     }
 }

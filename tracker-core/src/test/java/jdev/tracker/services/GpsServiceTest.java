@@ -23,20 +23,27 @@ public class GpsServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        coordinates= new ArrayList<Coordinate>();
-        Coordinate coordinate1 = new Coordinate(10, 10);
-        Coordinate coordinate2 = new Coordinate(10.1, 10.1);
-        coordinates.add(coordinate1);
-        coordinates.add(coordinate2);
         dataStorageService = new DataStorageService();
-        gpsService = new GpsService();
-
+        gpsService = new GpsService(dataStorageService);
     }
 
     @Test
     public void poolGPS() throws Exception {
-    when(coordinates).thenReturn(coordinates);
-    gpsService.poolGPS();
+    coordinates = gpsService.createCoordinates("26521.kml");
+    gpsService.setCoordinates(coordinates);
+    for (int i=0; i<10; i++){
+    gpsService.poolGPS();}
+    assertNotNull(dataStorageService.getQueue());
+    assertEquals(10, dataStorageService.getQueue().size());
+
+    }
+
+    @Test
+    public void createCoordinates(){
+      coordinates =  gpsService.createCoordinates("26521.kml");
+      assertEquals(643, coordinates.size());
+      assertEquals(56.487526, coordinates.get(0).getLatitude(), 0);
+      assertEquals(84.959198, coordinates.get(0).getLongitude(), 0);
     }
 
 }

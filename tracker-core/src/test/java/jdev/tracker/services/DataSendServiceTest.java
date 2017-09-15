@@ -11,6 +11,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
+
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
 /**
@@ -43,6 +45,6 @@ public class DataSendServiceTest {
     public void sendDTO() throws Exception {
         when(dataStorageService.getQueue()).thenReturn(que);
         when( restTemplate.postForObject("http://localhost:8080/rest/points/create", p, PointDTO.class)).thenReturn(p);
-        service.sendDTO();
+        assertEquals(9, service.sendDTO().size());
     }
 }
