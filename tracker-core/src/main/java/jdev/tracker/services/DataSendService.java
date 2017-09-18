@@ -23,10 +23,10 @@ public class DataSendService {
     DataStorageService dataStorageService;
 
 
-    RestTemplate restTemplate = new RestTemplate();
+   // RestTemplate restTemplate = new RestTemplate();
 
-   /* @Autowired
-    RestTemplate restTemplate;*/
+    @Autowired
+    RestTemplate restTemplate;
 
 
     @Scheduled(fixedDelay = TIME_OUT)

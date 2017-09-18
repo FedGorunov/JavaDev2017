@@ -75,7 +75,7 @@ project (':tracker-ui'){
 
 
 project(':tracker-core') {
-
+    apply plugin: 'java-library-distribution'
     apply plugin: 'org.springframework.boot'
 
     dependencies {
@@ -83,18 +83,18 @@ project(':tracker-core') {
         compile("org.springframework.boot:spring-boot-devtools")
         compile project(':common')
         testCompile("org.springframework.boot:spring-boot-starter-test")
-        // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
-        //compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
-        // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
-        // compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
-        // https://mvnrepository.com/artifact/de.micromata.jak/JavaAPIforKml
+        compile("org.springframework.boot:spring-boot-starter-data-jpa")
+        compile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
+        compile group: 'com.h2database', name: 'h2', version: '1.4.196'
         compile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.1'
+        //compile group: 'com.google.code.gson', name: 'gson', version: '2.8.1'
+        testCompile("org.springframework.boot:spring-boot-starter-test")
+        testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
+        testCompile group: 'com.h2database', name: 'h2', version: '1.4.196'
 
     }
 
-    /* task fatJar(type: OneJar) {
-         mainClass = 'jdev.tracker.Main'
-     }*/
+
     jar {
         baseName = 'tracker-core-boot'
         version =  '0.1.0'
