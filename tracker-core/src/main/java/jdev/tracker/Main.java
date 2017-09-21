@@ -22,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableScheduling
+@PropertySource("classpath:/tracker.properties")
 @ComponentScan("jdev.tracker.services")
 @EnableJpaRepositories("jdev.tracker.dao")
 @EntityScan(basePackageClasses = jdev.tracker.dao.Point.class)
