@@ -1,7 +1,7 @@
 package jdev.tracker.services;
 
 import de.micromata.opengis.kml.v_2_2_0.*;
-import jdev.dto.PointDTO;
+import jdev.tracker.dao.Point;
 import jdev.dto.Points;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class GpsService {
     public void poolGPS() {
         if (coordinates.iterator().hasNext()) {
             Coordinate coordinate = coordinates.iterator().next();
-            PointDTO dto = new PointDTO();
+            Point dto = new Point();
             dto.setAutoId(autoId);
             time= System.currentTimeMillis();
             dto.setTime(time);
@@ -60,16 +60,14 @@ public class GpsService {
             dto.setLon(lon);
             dto.setCourse(Points.getCourse(latPrev, lat, lonPrev, lon));
             dto.setSpeed(Points.getDistance(latPrev, lat, lonPrev, lon) * 1000 / TIMEOUT);
-            try {
-                dataStorageService.put(dto);
-                log.info("Gps point num: " + poolCount + " Time " + time);
-                coordinates.remove(coordinate);
-                latPrev =lat;
-                lonPrev =lon;
-                poolCount++;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+
+            dataStorageService.putDataBase(dto);
+
+            log.info("Gps point num: " + poolCount + " Time " + time);
+            coordinates.remove(coordinate);
+            latPrev =lat;
+            lonPrev =lon;
+            poolCount++;
         } else {
             log.info("The track is over.");
 
