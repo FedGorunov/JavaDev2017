@@ -16,11 +16,7 @@ import java.io.IOException;
 @RestController
 public class ServerController {
     private Logger logger = LoggerFactory.getLogger(ServerController.class);
-    private final RestTemplate rt;
 
-    public ServerController(@Autowired RestTemplate rt) {
-        this.rt = rt;
-    }
 
     @RequestMapping(value = "/rest/points/create", method = RequestMethod.POST, headers = "Accept=application/json")
     public @ResponseBody

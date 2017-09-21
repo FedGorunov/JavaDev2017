@@ -3,19 +3,15 @@ package jdev.tracker.services;
 import de.micromata.opengis.kml.v_2_2_0.Coordinate;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.when;
+
 
 /**
  * Created by Fedor on 09.09.2017.
  */
-@RunWith(MockitoJUnitRunner.class)
 public class GpsServiceTest {
     private List<Coordinate> coordinates;
     private DataStorageService dataStorageService;
