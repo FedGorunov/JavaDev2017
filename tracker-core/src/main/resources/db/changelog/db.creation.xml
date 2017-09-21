@@ -8,8 +8,8 @@
             (
             ID INT AUTO_INCREMENT PRIMARY KEY,
             AUTO_ID VARCHAR(8) NOT NULL,
-            LAT DOUBLE NOT NULL,
-            LON DOUBLE NOT NULL,
+            LATITUDE DOUBLE NOT NULL,
+            LONGITUDE DOUBLE NOT NULL,
             SPEED DOUBLE NOT NULL,
             COURSE DOUBLE NOT NULL,
             TIME NUMBER NOT NULL

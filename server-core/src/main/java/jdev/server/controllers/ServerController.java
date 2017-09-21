@@ -18,6 +18,7 @@ public class ServerController {
     private Logger logger = LoggerFactory.getLogger(ServerController.class);
 
 
+
     @RequestMapping(value = "/rest/points/create", method = RequestMethod.POST, headers = "Accept=application/json")
     public @ResponseBody
     PointDTO createPoint(@RequestBody PointDTO point) {
